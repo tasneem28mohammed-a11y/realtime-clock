@@ -1,8 +1,8 @@
-# Real Time Clock (RTC) using ATmega32
+# Real Time Clock using ATmega32
 
-A digital **Real Time Clock project** developed using the **ATmega32 AVR microcontroller**, programmed in **Embedded C**.
+A digital clock project developed using the **ATmega32 AVR microcontroller** and programmed in **Embedded C**.
 
-The system displays **hours, minutes, and seconds** using six multiplexed 7-segment displays and allows the user to manually adjust the time using six push buttons.
+The system displays **hours, minutes, and seconds** using six multiplexed 7-segment displays. The clock updates automatically using **Timer0 interrupts**, while four push buttons are used to manually adjust the hours and minutes.
 
 ## Project Overview
 
@@ -19,27 +19,27 @@ The system automatically updates the time every second.
 * Minutes count from `00` to `59`.
 * When minutes reach `60`, they reset to `00` and the hours are incremented.
 * Hours operate in a 24-hour format.
+* After `23:59:59`, the clock returns to `00:00:00`.
 
 ## Main Features
 
 * Digital clock displaying **Hours, Minutes, and Seconds**
-* Six 7-segment displays
-* 7-segment **Multiplexing**
+* 6 × 7-Segment Displays
+* 7-segment display **Multiplexing**
 * Time generation using **Timer0**
 * Timer interrupts for automatic time updates
-* Manual time adjustment using six push buttons
-* Increment and decrement control for:
+* 24-hour time format
+* Manual adjustment of:
 
   * Hours
   * Minutes
-  * Seconds
-* 24-hour time format
+* 4 push buttons for increment and decrement control
 
 ## Hardware Components
 
 * ATmega32 AVR Microcontroller
 * 6 × 7-Segment Displays
-* 6 × Push Buttons
+* 4 × Push Buttons
 * Supporting electronic components
 
 ## Push Button Controls
@@ -50,16 +50,14 @@ The system automatically updates the time every second.
 | Hour −   | Decrease hours   |
 | Minute + | Increase minutes |
 | Minute − | Decrease minutes |
-| Second + | Increase seconds |
-| Second − | Decrease seconds |
 
 ## Multiplexing
 
-Instead of controlling each 7-segment display independently, the project uses **multiplexing**.
+The project uses **multiplexing** to control the six 7-segment displays efficiently.
 
-The segment lines are shared between the six displays, while each display is enabled individually for a very short period of time.
+Instead of assigning separate segment lines to every display, the displays share the segment lines while each display is enabled individually.
 
-The microcontroller switches between the displays rapidly, making all six displays appear to be ON simultaneously to the human eye.
+The microcontroller switches between the six displays very quickly, making them appear to be ON simultaneously to the human eye.
 
 This technique reduces the number of microcontroller pins required to control the displays.
 
@@ -69,10 +67,10 @@ The program performs the following main tasks:
 
 1. Initializes the microcontroller I/O pins.
 2. Initializes Timer0.
-3. Uses timer interrupts to generate the required time interval.
-4. Updates the seconds every second.
+3. Uses timer interrupts to generate the required timing.
+4. Updates the seconds automatically.
 5. Updates minutes and hours when required.
-6. Reads the six push buttons for manual time adjustment.
+6. Reads the four push buttons for manual hour and minute adjustment.
 7. Continuously refreshes the six 7-segment displays using multiplexing.
 
 ## Time Update Logic
@@ -109,19 +107,20 @@ Hours = 0
 
 ## Tools & Technologies
 
-* **Embedded C**
-* **AVR Microcontroller**
-* **ATmega32**
-* **Timer0**
-* **Interrupts**
-* **GPIO**
-* **7-Segment Display**
-* **Multiplexing**
-* **Proteus Simulation**
+* Embedded C
+* AVR Microcontrollers
+* ATmega32
+* Timer0
+* Interrupts
+* GPIO
+* 7-Segment Displays
+* Multiplexing
+* Push Button Interfacing
+* Proteus Simulation
 
-## Project Demo
+## Example Operation
 
-The project can demonstrate:
+Normal time counting:
 
 ```text
 12:34:58
@@ -129,7 +128,7 @@ The project can demonstrate:
 12:35:00
 ```
 
-and the 24-hour rollover:
+24-hour rollover:
 
 ```text
 23:59:58
@@ -137,11 +136,11 @@ and the 24-hour rollover:
 00:00:00
 ```
 
-The displayed time can also be manually adjusted using the six push buttons.
+The hours and minutes can also be manually adjusted using the four push buttons.
 
 ## Team
 
-This project was developed as a **team project by five students** as part of our Microcontroller training.
+This project was developed as a **team project by five students** as part of the **NTI Microcontroller Training**.
 
 ## Learning Outcomes
 
@@ -152,7 +151,7 @@ Through this project, we gained practical experience with:
 * GPIO configuration
 * Timer and interrupt concepts
 * 7-segment display interfacing
-* Multiplexing techniques
+* Multiplexing
 * Push button interfacing
 * Debugging and testing embedded systems
 * Proteus simulation
@@ -161,7 +160,8 @@ Through this project, we gained practical experience with:
 
 Possible future improvements include:
 
-* Adding a dedicated RTC module such as DS1307 or DS3231
+* Adding buttons for manual seconds adjustment
+* Adding a dedicated RTC module such as DS3231
 * Adding alarm functionality
 * Adding date display
 * Saving time settings during power loss
@@ -169,4 +169,4 @@ Possible future improvements include:
 
 ---
 
-**Real Time Clock — AVR Microcontroller Project**
+**Real Time Clock — ATmega32 Embedded Systems Project**
